@@ -17,6 +17,8 @@ spec:
   template:
     metadata:
       annotations:
+        scheduler.alpha.kubernetes.io/tolerations: |
+          [{"key": "role", "value": "master", "effect": "NoSchedule" }]
         checksum/config: {{ include (print $.Template.BasePath "/controller-configmap.yaml") . | sha256sum }}
     {{- if .Values.controller.podAnnotations }}
 {{ toYaml .Values.controller.podAnnotations | indent 8}}
